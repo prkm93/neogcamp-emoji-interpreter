@@ -3,7 +3,7 @@ import "./App.css";
 
 export default function App() {
   const [emoji, setEmoji] = useState("translation will appear here");
-  const [emojis, setEmojis] = useState({
+  const emojis = {
     "😃": "grining",
     "😉": "wink",
     "😘": "kiss",
@@ -11,7 +11,7 @@ export default function App() {
     "👍": "ThumbsUp",
     "🔥": "Fire",
     "😟": "worried"
-  });
+  };
 
   const emojiSearchHandler = (e) => {
     const word = e.target.value;
@@ -41,6 +41,8 @@ export default function App() {
         {Object.keys(emojis).map((item) => {
           if (emojis[item] === emoji) {
             return item;
+          } else {
+            return null;
           }
         })}
       </p>
