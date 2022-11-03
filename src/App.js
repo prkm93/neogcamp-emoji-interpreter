@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 export default function App() {
-  const [emoji, setEmoji] = useState("translation will appear here");
+  const [emoji, setEmoji] = useState("translation will appear here...");
   const emojis = {
     "😃": "grining",
     "😉": "wink",
@@ -14,9 +14,9 @@ export default function App() {
   };
 
   const emojiSearchHandler = (e) => {
-    const word = e.target.value;
-    Object.values(emojis).forEach((item) => {
-      if (item.toLowerCase().includes(word.toLowerCase())) {
+    const symbol = e.target.value;
+    Object.keys(emojis).forEach((item) => {
+      if (item === symbol) {
         setEmoji(item);
         console.log(item);
       }
@@ -36,28 +36,34 @@ export default function App() {
         placeholder="Search your emoji"
         onChange={(e) => emojiSearchHandler(e)}
       />
-      <p>
+      <p className={emoji.length > 2 ? "": "emoji-result"}>
         {emoji}
-        {Object.keys(emojis).map((item) => {
-          if (emojis[item] === emoji) {
-            return item;
-          } else {
-            return null;
-          }
-        })}
       </p>
+      <h3 className="emoji-output">
+        {
+          Object.keys(emojis).map((item) => {
+            if (item === emoji) {
+              return emojis[item];
+            } else {
+              return null;
+            }
+          })
+        }
+      </h3>
       <p>
-        {Object.keys(emojis).map((item, i) => {
-          return (
-            <span
-              key={i}
-              className="emoji-item"
-              onClick={() => setEmoji(emojis[item])}
-            >
-              {item}
-            </span>
-          );
-        })}
+        {
+          Object.keys(emojis).map((item, i) => {
+            return (
+              <span
+                key={i}
+                className="emoji-item"
+                onClick={() => setEmoji(emojis[item])}
+              >
+                {item}
+              </span>
+            );
+          })
+        }
       </p>
     </div>
   );

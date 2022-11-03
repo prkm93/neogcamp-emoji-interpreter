@@ -9,5 +9,10 @@
 }
 .emoji-item {
   margin: 8px;
+  font-size: 30px;
   cursor: pointer;
-}  
+}
+.emoji-result {
+  font-size: 30px;
+  margin: 14px 0;
+}
