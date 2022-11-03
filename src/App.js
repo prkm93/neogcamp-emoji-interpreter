@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 export default function App() {
   const [emoji, setEmoji] = useState("translation will appear here...");
+  const [isFound, setIsFound] = useState(false);
+  const [ifSearched, setIfSearched] = useState(false);
   const emojis = {
     "😃": "grining",
     "😉": "wink",
@@ -10,21 +12,46 @@ export default function App() {
     "❤️": "heart",
     "👍": "ThumbsUp",
     "🔥": "Fire",
-    "😟": "worried"
+    "😟": "worried",
+    "😂": "laughing",
+    "😢": "crying",
+    "😮": "surprise",
+    "😇": "angel",
+    "😡": "angry",
+    "😈": "evil or devil",
+    "😬": "nervous or awkward",
+    "🐓": "chicken",
+    "🌹": "rose",
+    "💔": "broken heart"
   };
 
+  useEffect(() => {
+    if (isFound === false && ifSearched === true) {
+      setEmoji("no results found!");
+    }
+  }, [isFound, ifSearched]);
+
+/**
+ *  functon for searching emojis
+ * @param {*} e event parameter
+ */
   const emojiSearchHandler = (e) => {
+    setIsFound(false);
+    setIfSearched(true);
     const symbol = e.target.value;
     Object.keys(emojis).forEach((item) => {
       if (item === symbol) {
         setEmoji(item);
-        console.log(item);
+        setIsFound(true);
+        console.log("isFound inside", isFound);
       }
     });
 
-    if (e.target.value === "") {
-      setEmoji("translation will appear here");
+    if (symbol === "") {
+      setIfSearched(false);
+      setEmoji("translation will appear here...");
     }
+
   };
 
   return (
@@ -36,7 +63,7 @@ export default function App() {
         placeholder="Search your emoji"
         onChange={(e) => emojiSearchHandler(e)}
       />
-      <p className={emoji.length > 2 ? "": "emoji-result"}>
+      <p className={emoji.length > 2 ? "emoji-text": "emoji-result"}>
         {emoji}
       </p>
       <h3 className="emoji-output">
