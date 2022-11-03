@@ -1,13 +1,29 @@
+body {
+  background-color: antiquewhite;
+}
 .App {
   font-family: sans-serif;
   text-align: center;
 }
 .input-box {
-  width: 80%;
+  width: 60%;
   padding: 14px;
   overflow: hidden;
+  font-size: 20px;
+}
+.input-box::placeholder {
+  font-size: 15px;
 }
 .emoji-item {
   margin: 8px;
+  font-size: 40px;
   cursor: pointer;
-}  
+}
+.emoji-result {
+  font-size: 40px;
+  margin: 14px 0;
+}
+.emoji-text {
+  font-size: 20px;
+  font-weight: bold;
+}
